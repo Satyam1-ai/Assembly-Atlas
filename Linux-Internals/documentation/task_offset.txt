@@ -1,0 +1,7 @@
+The task offset is essentially what the kernel uses to figure out the offset .
+Everytime ...a process is being created ..it will get stored in the ...struct_task ..This will help figure out how the CPU will read the process
+in the struct_task you will be haivng fields like ..process id ...numbers ..then userID ..the pointer to the mm_struct ..and even the TASK_KSTACK .
+We are defining all of this ..in the offset file ..which will be calling upon in subsequent programs ..
+especially relating to the task struct that unix based systems use ..
+
+
