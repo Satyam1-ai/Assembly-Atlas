@@ -1,0 +1,19 @@
+Created a task 0 ..
+initialised with ..different fields based on how ..a struct_task is defined ..
+I did only use the ....a singly linked list for now ...to keep it lesss messy 
+But as we move forward ..i will keep modifying the code to include ..the ..
+circular doubly linked list ..and to handle over 128 cores ..
+
+
+Here i have used the ..dq as in 8 bytes for each ...but we could definitely optimize it much further ..
+The use of current_pointer is a way to inform the ..CPU ..that this is the current task I am execucting ....every time a context-swtich happens we could use this definition ..
+Next we defined the ..mm's location as ...0x1000 why ??
+
+Simple reason the mm is just a memory location for the tasks ..Think of each process as a box ..where the CPU allocates ..1 box for each process ..These boxes are all of the size . 4096 bytes ...
+each process thinks he is king...But this is a separate topic called paging ..whcih I will discuss later ..
+
+
+And i have defined the box to start from ..0x1000 becasue that is the 4096 in the hex format ..We could have started from 0 but instead we just move one step becasur the BIOS i loaded and uses  the first 4096bytes 
+when hardware is initliazed .....just to be safe ..we skip the first box entirely 
+
+
