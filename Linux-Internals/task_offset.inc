@@ -12,13 +12,13 @@ ZOMBIE equ 2
 ;do some weird stuff ......weird changes ...mind could get a bit fucked ..
 
 
-%define TASK_KSTACK
-%define STATE 
-%define TASK_PID
-%define TASK_FILES
-%define TASK_MM
-%define TASK_NEXT
-%define TASK_SIZE 
+%define TASK_KSTACK  0
+%define STATE  8
+%define TASK_PID  12
+%define TASK_FILES 16
+%define TASK_MM  24
+%define TASK_NEXT 32
+%define TASK_SIZE 40
 
 
 
