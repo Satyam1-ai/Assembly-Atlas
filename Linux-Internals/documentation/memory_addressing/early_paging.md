@@ -68,17 +68,17 @@ If the page table entry is **invalid**, a **page fault** occurs.
 
 ```mermaid
 flowchart TD
-    A[Process Starts] --> B[OS creates empty page table\n(all entries = invalid)]
+    A[Process Starts] --> B["OS creates empty page table (all entries = invalid)"]
     B --> C[Load page table base into PTBR]
-    C --> D{Program accesses\nvirtual address?}
-    D -->|Yes| E[MMU splits addr:\npage# + offset]
-    E --> F{Page table entry\nvalid?}
+    C --> D{Program accesses virtual address?}
+    D -->|Yes| E["MMU splits addr: page# + offset"]
+    E --> F{Page table entry valid?}
     F -->|No| G[Page Fault!]
     G --> H[OS allocates free physical frame]
-    H --> I[Load data if needed\n(e.g., from disk)]
-    I --> J[Update page table entry\n(mark as valid)]
+    H --> I["Load data if needed (e.g., from disk)"]
+    I --> J["Update page table entry (mark as valid)"]
     J --> K[Restart instruction]
-    F -->|Yes| L[MMU computes physical address:\n(frame << 12) + offset]
+    F -->|Yes| L["MMU computes physical address: (frame << 12) + offset"]
     L --> M[Access physical memory]
     K --> D
     M --> D
