@@ -36,6 +36,34 @@ If the page table entry is **invalid**, a **page fault** occurs.
 
 ---
 
+# Examples of Virtual Memory and Paging
+
+### Example 1: Initial State
+*   **Process A starts.**
+*   **Page table** created at physical addr `0x100000`.
+*   **PTBR** (Page Table Base Register) ← `0x100000`.
+*   All 1024 entries = **invalid**.
+   
+### Example 2: First Access
+*   Code reads from virtual `0x1000` (page 1, offset 0).
+*   **Page fault** → OS maps page 1 → physical frame `0x5000`.
+*   **Page table[1]** = `0x5` (frame number), valid=1.
+
+### Example 3: Data Access
+*   Program writes to `0x3ABC` (page 3, offset 0xBC).
+*   If unmapped → **page fault** → OS allocates frame `0x8000`.
+*   **Physical address** = `0x8000 + 0xBC = 0x80BC`.
+    
+### Example 4: Internal Fragmentation
+*   Heap allocates 2049 bytes → spans 2 pages (0–4095).
+*   Only 2049 bytes used → **2047 bytes wasted** (internal fragmentation).
+    
+### Example 5: Context Switch   
+*   Switch to **Process B**.
+*   OS loads B’s page table base into **PTBR**.
+*   Now all virtual addresses use B’s mappings.
+
+
 ## Workflow Diagram (Single-Level Paging)
 
 ```mermaid
@@ -56,30 +84,5 @@ flowchart TD
     M --> D
 
 
-# Examples of Virtual Memory and Paging
 
-### Example 1: Initial State
-*   **Process A starts.**
-*   **Page table** created at physical addr `0x100000`.
-*   **PTBR** (Page Table Base Register) ← `0x100000`.
-*   All 1024 entries = **invalid**.
 
-### Example 2: First Access
-*   Code reads from virtual `0x1000` (page 1, offset 0).
-*   **Page fault** → OS maps page 1 → physical frame `0x5000`.
-*   **Page table[1]** = `0x5` (frame number), valid=1.
-
-### Example 3: Data Access
-*   Program writes to `0x3ABC` (page 3, offset 0xBC).
-*   If unmapped → **page fault** → OS allocates frame `0x8000`.
-*   **Physical address** = `0x8000 + 0xBC = 0x80BC`.
-
-### Example 4: Internal Fragmentation
-*   Heap allocates 2049 bytes → spans 2 pages (0–4095).
-*   Only 2049 bytes used → **2047 bytes wasted** (internal fragmentation).
-
-### Example 5: Context Switch
-*   Switch to **Process B**.
-*   OS loads B’s page table base into **PTBR**.
-*   Now all virtual addresses use B’s mappings.
- 
